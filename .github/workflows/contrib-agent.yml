@@ -1,0 +1,55 @@
+name: contrib-agent
+
+on:
+  schedule:
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+    inputs:
+      live_run:
+        description: "Open a live draft PR if ranking and caps allow (default is dry-run discover)"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+
+  discover:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Discover (dry-run by default)
+        env:
+          GITHUB_TOKEN: ${{ secrets.CONTRIB_AGENT_TOKEN || secrets.GITHUB_TOKEN }}
+          CONTRIB_AGENT_DRY_RUN: "1"
+        run: |
+          if [ "${{ github.event.inputs.live_run }}" = "true"]; then
+            node --experimental-strip-types --disable-warning=ExperimentalWarning cli/contrib-agent.ts run
+          else
+            node --experimental-strip-types --disable-warning=ExperimentalWarning cli/contrib-agent.ts discover --dry-run
+          fi
