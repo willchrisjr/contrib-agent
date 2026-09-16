@@ -1,0 +1,9 @@
+{
+  "name": "contrib-agent",
+  "user": "ubuntu",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "install": "npm ci"
+}

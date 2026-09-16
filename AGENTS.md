@@ -2,6 +2,8 @@
 
 Discover GitHub issues from `config/profile.yaml`, rank them, and open draft PRs. CLI: `npx contrib-agent discover --dry-run`. Shared library lives in `agent/lib/`; eve tools in `agent/tools/` wrap it. Keep `dryRun: true` until ranking is trusted. Run `npm test` after scoring or policy changes.
 
+Cloud Agents: Node.js 24 is required (`engines` in `package.json`). `.cursor/environment.json` installs with `npm ci` on a Node 24 image.
+
 # eve Agent App
 
 This project uses the eve framework: an agent is a directory of files under `agent/`, and eve compiles and runs it.
