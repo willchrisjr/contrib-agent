@@ -45,7 +45,7 @@ export interface GitHubClient {
   listOpenDraftPulls(originRepo: string, headRepo: string): Promise<number>;
 }
 
-export const SEARCH_MAX_PAGES = 5;
+export const SEARCH_MAX_PAGES = 2;
 export const GITHUB_MAX_ATTEMPTS = 5;
 export const SEARCH_MIN_INTERVAL_MS = 20_000;
 const RETRY_DELAY_CAP_MS = 120_000;
@@ -137,7 +137,7 @@ function wait(ms: number): Promise<void> {
 }
 
 function searchApiPerPage(perPage: number): number {
-  return Math.min(100, Math.max(perPage * 5, perPage));
+  return Math.min(100, Math.max(perPage * 10, perPage));
 }
 
 interface RepoPayload {
@@ -224,6 +224,7 @@ export function liveGitHubClient(options?: LiveGitHubClientOptions): GitHubClien
       if (delay === null || attempt >= GITHUB_MAX_ATTEMPTS) {
         throw lastError;
       }
+      console.error(`GitHub ${response.status} ${path.split("?")[0]}: rate limited, retrying in ${Math.round(delay / 1000)}s`);
       await sleep(delay);
     }
     throw lastError ?? new Error(`GitHub request failed: ${path}`);

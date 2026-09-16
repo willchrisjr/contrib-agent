@@ -170,10 +170,10 @@ test("searchIssues paginates past PRs and only fetches issue repos", async () =>
     const url = new URL(String(input));
     if (url.pathname === "/search/issues") {
       searchCalls.push(url.searchParams.get("page") ?? "");
-      assert.equal(url.searchParams.get("per_page"), "10");
+      assert.equal(url.searchParams.get("per_page"), "20");
       const page = url.searchParams.get("page");
       if (page === "1") {
-        const items = Array.from({ length: 9 }, (_unused, index) => pullRequestItem("example/pr-one", index + 1));
+        const items = Array.from({ length: 19 }, (_unused, index) => pullRequestItem("example/pr-one", index + 1));
         items.push(
           searchItem({
             repo: "example/real-one",
@@ -192,7 +192,7 @@ test("searchIssues paginates past PRs and only fetches issue repos", async () =>
             title: "Second docs issue",
             htmlUrl: "https://github.com/example/real-two/issues/11",
           }),
-          ...Array.from({ length: 9 }, (_unused, index) => pullRequestItem("example/pr-three", index + 1)),
+          ...Array.from({ length: 19 }, (_unused, index) => pullRequestItem("example/pr-three", index + 1)),
         ],
       });
     }
