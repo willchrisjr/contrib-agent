@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CONTRIB_AGENT_TOKEN || secrets.GITHUB_TOKEN }}
           CONTRIB_AGENT_DRY_RUN: "1"
         run: |
-          if [ "${{ github.event.inputs.live_run }}" = "true"]; then
+          if [ "${{ github.event.inputs.live_run }}" = "true" ]; then
             node --experimental-strip-types --disable-warning=ExperimentalWarning cli/contrib-agent.ts run
           else
             node --experimental-strip-types --disable-warning=ExperimentalWarning cli/contrib-agent.ts discover --dry-run
