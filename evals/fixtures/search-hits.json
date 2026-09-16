@@ -1,0 +1,228 @@
+{
+  "hits": [
+    {
+      "repo": {
+        "fullName": "example/small-cli",
+        "owner": "example",
+        "name": "small-cli",
+        "description": "A tiny TypeScript CLI",
+        "language": "TypeScript",
+        "topics": ["cli"],
+        "stars": 240,
+        "pushedAt": "REPLACE_RECENT",
+        "archived": false,
+        "license": "MIT",
+        "defaultBranch": "main",
+        "htmlUrl": "https://github.com/example/small-cli",
+        "hasContributing": true
+      },
+      "issue": {
+        "number": 12,
+        "title": "Document the --json flag",
+        "body": "The CLI gained a --json flag last month but README still only shows the table output. Please add a short example under Usage, including a sample payload and the expected stdout. This is a docs-only change.",
+        "labels": ["good first issue", "documentation"],
+        "comments": 1,
+        "updatedAt": "REPLACE_RECENT",
+        "htmlUrl": "https://github.com/example/small-cli/issues/12",
+        "hasLinkedPr": false,
+        "assigneeLogin": null
+      }
+    },
+    {
+      "repo": {
+        "fullName": "willchrisjr/code-contributions",
+        "owner": "willchrisjr",
+        "name": "code-contributions",
+        "description": "Practice contributing with code",
+        "language": "HTML",
+        "topics": ["documentation"],
+        "stars": 12,
+        "pushedAt": "REPLACE_RECENT",
+        "archived": false,
+        "license": "MIT",
+        "defaultBranch": "main",
+        "htmlUrl": "https://github.com/willchrisjr/code-contributions",
+        "hasContributing": true
+      },
+      "issue": {
+        "number": 1,
+        "title": "Add your contributor card",
+        "body": "Create contributors/<github-id>.html using the template in CONTRIBUTING.md. This is the teaching-repo golden path for contrib-agent.",
+        "labels": ["contrib-agent", "good first issue"],
+        "comments": 0,
+        "updatedAt": "REPLACE_RECENT",
+        "htmlUrl": "https://github.com/willchrisjr/code-contributions/issues/1",
+        "hasLinkedPr": false,
+        "assigneeLogin": null
+      }
+    },
+    {
+      "repo": {
+        "fullName": "example/vague-app",
+        "owner": "example",
+        "name": "vague-app",
+        "description": "Needs a rewrite",
+        "language": "TypeScript",
+        "topics": [],
+        "stars": 80,
+        "pushedAt": "REPLACE_RECENT",
+        "archived": false,
+        "license": "MIT",
+        "defaultBranch": "main",
+        "htmlUrl": "https://github.com/example/vague-app",
+        "hasContributing": false
+      },
+      "issue": {
+        "number": 99,
+        "title": "Rewrite the entire codebase from scratch",
+        "body": "Please rearchitect the whole system and overhaul all modules.",
+        "labels": ["help wanted"],
+        "comments": 20,
+        "updatedAt": "REPLACE_RECENT",
+        "htmlUrl": "https://github.com/example/vague-app/issues/99",
+        "hasLinkedPr": false,
+        "assigneeLogin": null
+      }
+    },
+    {
+      "repo": {
+        "fullName": "kubernetes/kubernetes",
+        "owner": "kubernetes",
+        "name": "kubernetes",
+        "description": "Production-Grade Container Scheduling",
+        "language": "Go",
+        "topics": [],
+        "stars": 110000,
+        "pushedAt": "REPLACE_RECENT",
+        "archived": false,
+        "license": "Apache-2.0",
+        "defaultBranch": "master",
+        "htmlUrl": "https://github.com/kubernetes/kubernetes",
+        "hasContributing": true
+      },
+      "issue": {
+        "number": 4,
+        "title": "good first issue bait",
+        "body": "This should never rank because the org is denylisted and stars exceed the band.",
+        "labels": ["good first issue"],
+        "comments": 0,
+        "updatedAt": "REPLACE_RECENT",
+        "htmlUrl": "https://github.com/kubernetes/kubernetes/issues/4",
+        "hasLinkedPr": false,
+        "assigneeLogin": null
+      }
+    },
+    {
+      "repo": {
+        "fullName": "example/archived-lib",
+        "owner": "example",
+        "name": "archived-lib",
+        "description": "dead",
+        "language": "JavaScript",
+        "topics": [],
+        "stars": 40,
+        "pushedAt": "REPLACE_RECENT",
+        "archived": true,
+        "license": "MIT",
+        "defaultBranch": "main",
+        "htmlUrl": "https://github.com/example/archived-lib",
+        "hasContributing": false
+      },
+      "issue": {
+        "number": 3,
+        "title": "Fix typo",
+        "body": "A simple typo in README that would otherwise be a fine first issue.",
+        "labels": ["good first issue"],
+        "comments": 0,
+        "updatedAt": "REPLACE_RECENT",
+        "htmlUrl": "https://github.com/example/archived-lib/issues/3",
+        "hasLinkedPr": false,
+        "assigneeLogin": null
+      }
+    },
+    {
+      "repo": {
+        "fullName": "example/unlicensed",
+        "owner": "example",
+        "name": "unlicensed",
+        "description": "no license",
+        "language": "Python",
+        "topics": [],
+        "stars": 55,
+        "pushedAt": "REPLACE_RECENT",
+        "archived": false,
+        "license": null,
+        "defaultBranch": "main",
+        "htmlUrl": "https://github.com/example/unlicensed",
+        "hasContributing": false
+      },
+      "issue": {
+        "number": 7,
+        "title": "Add tests",
+        "body": "Please add unit tests around the parser so contributors can change behavior safely.",
+        "labels": ["help wanted"],
+        "comments": 0,
+        "updatedAt": "REPLACE_RECENT",
+        "htmlUrl": "https://github.com/example/unlicensed/issues/7",
+        "hasLinkedPr": false,
+        "assigneeLogin": null
+      }
+    },
+    {
+      "repo": {
+        "fullName": "example/linked-pr",
+        "owner": "example",
+        "name": "linked-pr",
+        "description": "already in flight",
+        "language": "TypeScript",
+        "topics": ["cli"],
+        "stars": 100,
+        "pushedAt": "REPLACE_RECENT",
+        "archived": false,
+        "license": "MIT",
+        "defaultBranch": "main",
+        "htmlUrl": "https://github.com/example/linked-pr",
+        "hasContributing": true
+      },
+      "issue": {
+        "number": 22,
+        "title": "Already being fixed",
+        "body": "Someone already opened a pull request for this documentation fix.",
+        "labels": ["good first issue"],
+        "comments": 2,
+        "updatedAt": "REPLACE_RECENT",
+        "htmlUrl": "https://github.com/example/linked-pr/issues/22",
+        "hasLinkedPr": true,
+        "assigneeLogin": null
+      }
+    },
+    {
+      "repo": {
+        "fullName": "example/short-issue",
+        "owner": "example",
+        "name": "short-issue",
+        "description": "vague",
+        "language": "JavaScript",
+        "topics": [],
+        "stars": 30,
+        "pushedAt": "REPLACE_RECENT",
+        "archived": false,
+        "license": "MIT",
+        "defaultBranch": "main",
+        "htmlUrl": "https://github.com/example/short-issue",
+        "hasContributing": false
+      },
+      "issue": {
+        "number": 5,
+        "title": "fix it",
+        "body": "pls",
+        "labels": ["help wanted"],
+        "comments": 0,
+        "updatedAt": "REPLACE_RECENT",
+        "htmlUrl": "https://github.com/example/short-issue/issues/5",
+        "hasLinkedPr": false,
+        "assigneeLogin": null
+      }
+    }
+  ]
+}
