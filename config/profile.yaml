@@ -1,0 +1,54 @@
+# Preference profile. Denylist always wins over search hits.
+languages:
+  - TypeScript
+  - JavaScript
+  - HTML
+  - Python
+topics:
+  - cli
+  - documentation
+  - testing
+labels:
+  - good first issue
+  - help wanted
+  - bug
+preferLabel: contrib-agent
+stars:
+  min: 10
+  max: 20000
+pushedWithinDays: 90
+issueUpdatedWithinDays: 60
+excludeUnlicensed: true
+excludeArchived: true
+pins:
+  - willchrisjr/code-contributions
+denylist:
+  orgs:
+    - kubernetes
+    - google
+    - microsoft
+    - facebook
+    - meta
+    - apple
+    - amazon
+    - apache
+    - llvm
+    - rust-lang
+    - golang
+    - torvalds
+    - nixos
+    - nodejs
+    - chromium
+    - tensorflow
+    - pytorch
+    - elastic
+    - hashicorp
+  repos:
+    - microsoft/vscode
+    - torvalds/linux
+dryRun: true
+caps:
+  maxPrsPerDay: 1
+  maxOpenDraftsPerRepo: 1
+  maxAttemptsPerIssue: 1
+statePath: .contrib-agent/state.json
