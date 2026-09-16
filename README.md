@@ -25,6 +25,15 @@ This is not a first-PR teaching site. Use [`code-contributions`](https://github.
 
 Edit [`config/profile.yaml`](config/profile.yaml). You describe what you can work on; the agent searches. There is no hand-picked allowlist.
 
+| Field | Role |
+| --- | --- |
+| `languages`, `topics`, `labels` | Search and ranking |
+| `stars`, `pushedWithinDays` | Skip dead repos and mega-repos where PRs rot |
+| `denylist` | Always wins over search hits |
+| `pins` | Repos searched first |
+| `dryRun` | Discover and plan only; no forks or PRs |
+| `caps` | Global PRs/day, open drafts per repo, one attempt per issue |
+
 Maintainer label `contrib-agent` is a **bonus** in ranking, not a requirement.
 
 ## CLI
