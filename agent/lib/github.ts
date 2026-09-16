@@ -47,6 +47,7 @@ export interface GitHubClient {
 
 export const SEARCH_MAX_PAGES = 5;
 export const GITHUB_MAX_ATTEMPTS = 5;
+export const SEARCH_MIN_INTERVAL_MS = 20_000;
 const RETRY_DELAY_CAP_MS = 120_000;
 
 export interface LiveGitHubClientOptions {
@@ -124,7 +125,7 @@ export function githubRetryDelayMs(input: {
       return Math.min(resetMs + 1000, RETRY_DELAY_CAP_MS);
     }
   }
-  const base = secondary ? 20_000 : 5_000;
+  const base = secondary ? 60_000 : 5_000;
   const exp = Math.max(attempt, 1) - 1;
   return Math.min(base * 2 ** exp, RETRY_DELAY_CAP_MS);
 }
@@ -180,6 +181,15 @@ export function liveGitHubClient(options?: LiveGitHubClientOptions): GitHubClien
   const repoCache = new Map<string, RepoInfo>();
   const fetchFn = options?.fetch ?? fetch;
   const sleep = options?.sleep ?? wait;
+  let lastSearchAt = 0;
+
+  async function throttleSearch(): Promise<void> {
+    const elapsed = Date.now() - lastSearchAt;
+    if (lastSearchAt > 0 && elapsed < SEARCH_MIN_INTERVAL_MS) {
+      await sleep(SEARCH_MIN_INTERVAL_MS - elapsed);
+    }
+    lastSearchAt = Date.now();
+  }
 
   async function github<T>(path: string, init?: RequestInit): Promise<T> {
     const token = requiredToken();
@@ -236,6 +246,7 @@ export function liveGitHubClient(options?: LiveGitHubClientOptions): GitHubClien
       const apiPerPage = searchApiPerPage(perPage);
       let page = 1;
       while (hits.length < perPage && page <= SEARCH_MAX_PAGES) {
+        await throttleSearch();
         const params = new URLSearchParams({
           q: query,
           per_page: String(apiPerPage),

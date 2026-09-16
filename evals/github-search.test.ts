@@ -3,6 +3,7 @@ import { test } from "node:test";
 import {
   GITHUB_MAX_ATTEMPTS,
   SEARCH_MAX_PAGES,
+  SEARCH_MIN_INTERVAL_MS,
   githubRetryDelayMs,
   isSearchPullRequest,
   liveGitHubClient,
@@ -124,7 +125,7 @@ test("githubRetryDelayMs backs off secondary rate limits and honors Retry-After"
       rateLimitReset: null,
       attempt: 1,
     }),
-    20_000,
+    60_000,
   );
 
   assert.equal(
@@ -136,7 +137,7 @@ test("githubRetryDelayMs backs off secondary rate limits and honors Retry-After"
       rateLimitReset: null,
       attempt: 2,
     }),
-    40_000,
+    120_000,
   );
 
   assert.equal(
@@ -279,7 +280,7 @@ test("live client retries secondary rate limits then succeeds", async () => {
   });
   const hits = await client.searchIssues("is:issue is:open", 1);
   assert.equal(hits[0]?.issue.number, 4);
-  assert.deepEqual(delays, [20_000]);
+  assert.deepEqual(delays, [60_000]);
   assert.equal(searchAttempts, 2);
 });
 
@@ -303,4 +304,36 @@ test("retries stop after GITHUB_MAX_ATTEMPTS", async () => {
   const client = liveGitHubClient({ fetch: fetchFn, sleep: async () => {} });
   await assert.rejects(() => client.searchIssues("is:issue"), /secondary rate limit/);
   assert.equal(calls, GITHUB_MAX_ATTEMPTS);
+});
+
+test("searchIssues waits SEARCH_MIN_INTERVAL_MS between pages", async () => {
+  const delays: number[] = [];
+  const fetchFn: typeof fetch = async (input) => {
+    const url = new URL(String(input));
+    if (url.pathname === "/search/issues") {
+      const perPage = Number(url.searchParams.get("per_page"));
+      const page = Number(url.searchParams.get("page"));
+      const items = Array.from({ length: perPage }, (_unused, index) =>
+        pullRequestItem("example/only-prs", page * 100 + index),
+      );
+      items[0] = searchItem({
+        repo: "example/real-one",
+        number: page,
+        title: `Issue ${page}`,
+        htmlUrl: `https://github.com/example/real-one/issues/${page}`,
+      });
+      return jsonResponse(200, { items });
+    }
+    return jsonResponse(200, repoPayload("example/real-one"));
+  };
+  const client = liveGitHubClient({
+    fetch: fetchFn,
+    sleep: async (ms) => {
+      delays.push(ms);
+    },
+  });
+  const hits = await client.searchIssues("is:issue is:open", 2);
+  assert.equal(hits.length, 2);
+  assert.equal(delays.length, 1);
+  assert.ok(delays[0]! >= SEARCH_MIN_INTERVAL_MS - 50);
 });
